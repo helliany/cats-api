@@ -35,9 +35,12 @@ export const categoriesSlice = createSlice({
   },
 });
 
-export const getImagesAsync = createAsyncThunk("images/fetchData", async () => {
-  const response = await catsAPI.getImage();
-  return response.data[0];
-});
+export const getImagesAsync = createAsyncThunk(
+  "images/fetchData",
+  async (data: { breed: string; category: string; fileType: string }) => {
+    const response = await catsAPI.getImage(data);
+    return response.data[0];
+  }
+);
 
 export default categoriesSlice.reducer;

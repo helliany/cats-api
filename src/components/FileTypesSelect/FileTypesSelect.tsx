@@ -6,17 +6,17 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setSelected } from "../../redux/fileTypesSlice";
 
 const FileTypesSelect = () => {
   const [value, setValue] = useState("");
-  const types = {
-    animated: "gif",
-    static: "jpg, png",
-    all: "gif, jpg, png",
-  };
+  const types = useAppSelector((state) => state.files.fileTypes);
+  const dispatch = useAppDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string);
+    dispatch(setSelected(event.target.value as string));
   };
 
   return (

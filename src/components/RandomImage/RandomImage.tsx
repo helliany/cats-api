@@ -6,14 +6,23 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 
 const RandomImage = () => {
   const { image, status } = useAppSelector((state) => state.images);
+  const { selectedBreed } = useAppSelector((state) => state.breeds);
+  const { selectedCategory } = useAppSelector((state) => state.categories);
+  const { selectedFileType } = useAppSelector((state) => state.files);
   const dispatch = useAppDispatch();
 
+  const data = {
+    breed: selectedBreed,
+    category: selectedCategory,
+    fileType: selectedFileType,
+  }
+
   useEffect(() => {
-    dispatch(getImagesAsync());
+    dispatch(getImagesAsync(data));
   }, []);
 
   const handleClick = () => {
-    dispatch(getImagesAsync());
+    dispatch(getImagesAsync(data));
   };
 
   return (

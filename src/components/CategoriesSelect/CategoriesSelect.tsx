@@ -7,7 +7,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { getCategoriesAsync } from "../../redux/categoriesSlice";
+import { getCategoriesAsync, setSelected } from "../../redux/categoriesSlice";
 
 const CategoriesSelect = () => {
   const [value, setValue] = useState("");
@@ -16,6 +16,7 @@ const CategoriesSelect = () => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string);
+    dispatch(setSelected(event.target.value as string));
   };
 
   useEffect(() => {

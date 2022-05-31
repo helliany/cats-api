@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getBreedsAsync } from "../../redux/breedsSlice";
+import { getBreedsAsync, setSelected } from "../../redux/breedsSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   FormControl,
@@ -16,6 +16,7 @@ const BreedsSelect = () => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string);
+    dispatch(setSelected(event.target.value as string));
   };
 
   useEffect(() => {

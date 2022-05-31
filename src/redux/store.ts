@@ -3,6 +3,7 @@ import breedsReducer from './breedsSlice';
 import categoriesReducer from './categoriesSlice';
 import imagesReducer from './imagesSlice';
 import counterReducer from '../features/counter/counterSlice';
+import fileTypesReducer from './fileTypesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     categories: categoriesReducer,
     images: imagesReducer,
     counter: counterReducer,
+    files: fileTypesReducer,
   },
 });
 

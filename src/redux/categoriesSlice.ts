@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { catsAPI } from "../api/api";
 
 export interface ICategory {
@@ -9,17 +9,23 @@ export interface ICategory {
 export interface ICategories {
   categories: ICategory[];
   status: "loading" | "success" | "failed" | "";
+  selectedCategory: string;
 }
 
 const initialState: ICategories = {
   categories: [],
   status: "",
+  selectedCategory: "",
 };
 
 export const categoriesSlice = createSlice({
   name: "categories",
   initialState,
-  reducers: {},
+  reducers: {
+    setSelected: (state, action: PayloadAction<string>) => {
+      state.selectedCategory = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCategoriesAsync.pending, (state) => {
@@ -39,5 +45,7 @@ export const getCategoriesAsync = createAsyncThunk("categories/fetchData", async
   const response = await catsAPI.getCategories();
   return response.data;
 });
+
+export const { setSelected } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

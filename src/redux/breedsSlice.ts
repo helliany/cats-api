@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { catsAPI } from "../api/api";
 
 export interface IBreed {
@@ -9,17 +9,23 @@ export interface IBreed {
 export interface IBreeds {
   breeds: IBreed[];
   status: "loading" | "success" | "failed" | "";
+  selectedBreed: string;
 }
 
 const initialState: IBreeds = {
   breeds: [],
   status: "",
+  selectedBreed: "",
 };
 
 export const breedsSlice = createSlice({
   name: "breeds",
   initialState,
-  reducers: {},
+  reducers: {
+    setSelected: (state, action: PayloadAction<string>) => {
+      state.selectedBreed = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBreedsAsync.pending, (state) => {
@@ -39,5 +45,7 @@ export const getBreedsAsync = createAsyncThunk("breeds/fetchData", async () => {
   const response = await catsAPI.getBreeds();
   return response.data;
 });
+
+export const { setSelected } = breedsSlice.actions;
 
 export default breedsSlice.reducer;
