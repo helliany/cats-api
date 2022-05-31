@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 const FileTypesSelect = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const types = {
-    animated: 'gif',
-    static: 'jpg, png',
-    all: 'gif, jpg, png',
-  }
+    animated: "gif",
+    static: "jpg, png",
+    all: "gif, jpg, png",
+  };
 
-  const handleChange = (event: SelectChangeEvent ) => {
+  const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string);
   };
 
@@ -23,7 +29,9 @@ const FileTypesSelect = () => {
         onChange={handleChange}
       >
         {Object.entries(types).map((type) => (
-          <MenuItem key={type[0]} value={type[1]}>{type[1]}</MenuItem>
+          <MenuItem key={type[0]} value={type[1]}>
+            {type[1]}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>

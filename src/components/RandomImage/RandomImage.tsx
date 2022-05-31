@@ -5,7 +5,7 @@ import { getImagesAsync } from "../../redux/imagesSlice";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 
 const RandomImage = () => {
-  const {image, status} = useAppSelector((state) => state.images);
+  const { image, status } = useAppSelector((state) => state.images);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -14,23 +14,33 @@ const RandomImage = () => {
 
   const handleClick = () => {
     dispatch(getImagesAsync());
-  }
+  };
 
   return (
-    <Box textAlign='center'>
+    <Box textAlign="center">
       <Button
-        color='primary'
-        variant='contained'
-        size='large'
+        color="primary"
+        variant="contained"
+        size="large"
         disableElevation
         sx={{ mb: 3 }}
         onClick={handleClick}
       >
-        <AutorenewIcon />
+        <AutorenewIcon sx={{ mr: "6px" }} />
         Next
       </Button>
-      <Card sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 3, height: 'calc(100vh - 300px)' }} elevation={4}>
-        {status === 'loading' ? (
+      <Card
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          p: 3,
+          height: { xs: "400px", md: "calc(100vh - 300px)" },
+          backgroundColor: "#e5dbff",
+        }}
+        elevation={4}
+      >
+        {status === "loading" ? (
           <CircularProgress size={100} />
         ) : (
           <Box
