@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   FormControl,
@@ -8,15 +8,17 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { getCategoriesAsync, setSelected } from "../../redux/categoriesSlice";
+import { setSelected as setSelectedBreed } from "../../redux/breedsSlice";
+import { setSelected as setSelectedFile } from "../../redux/fileTypesSlice";
 
 const CategoriesSelect = () => {
-  const [value, setValue] = useState("");
-  const categories = useAppSelector((state) => state.categories.categories);
+  const { categories, selectedCategory } = useAppSelector((state) => state.categories);
   const dispatch = useAppDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setValue(event.target.value as string);
     dispatch(setSelected(event.target.value as string));
+    dispatch(setSelectedBreed(''));
+    dispatch(setSelectedFile(''));
   };
 
   useEffect(() => {
@@ -28,13 +30,13 @@ const CategoriesSelect = () => {
       <InputLabel id="select">Category</InputLabel>
       <Select
         labelId="select"
-        value={value}
+        value={selectedCategory}
         label="Category"
         onChange={handleChange}
       >
         {categories.length > 0 &&
           categories.map((category) => (
-            <MenuItem key={category.id} value={category.name}>
+            <MenuItem key={category.id} value={category.id}>
               {category.name}
             </MenuItem>
           ))}

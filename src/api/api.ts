@@ -17,7 +17,7 @@ export const catsAPI = {
   },
   getImage(data: { breed: string; category: string; fileType: string }) {
     return instance.get(
-      `/images/search?breed_ids=${data.breed}category_ids=${data.category}mime_types=${data.fileType}`
+      `/images/search?breed_ids=${data.breed}&category_ids=${data.category}&mime_types=${data.fileType}`
     );
   },
 };

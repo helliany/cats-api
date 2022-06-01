@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getBreedsAsync, setSelected } from "../../redux/breedsSlice";
+import { setSelected as setSelectedCategory } from "../../redux/categoriesSlice";
+import { setSelected as setSelectedFile } from "../../redux/fileTypesSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   FormControl,
@@ -10,13 +12,13 @@ import {
 } from "@mui/material";
 
 const BreedsSelect = () => {
-  const [value, setValue] = useState("");
-  const breeds = useAppSelector((state) => state.breeds.breeds);
+  const { breeds, selectedBreed } = useAppSelector((state) => state.breeds);
   const dispatch = useAppDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setValue(event.target.value as string);
     dispatch(setSelected(event.target.value as string));
+    dispatch(setSelectedCategory(''));
+    dispatch(setSelectedFile(''));
   };
 
   useEffect(() => {
@@ -28,13 +30,13 @@ const BreedsSelect = () => {
       <InputLabel id="select">Breed</InputLabel>
       <Select
         labelId="select"
-        value={value}
+        value={selectedBreed}
         label="Breed"
         onChange={handleChange}
       >
         {breeds.length > 0 &&
           breeds.map((breed) => (
-            <MenuItem key={breed.id} value={breed.name}>
+            <MenuItem key={breed.id} value={breed.id}>
               {breed.name}
             </MenuItem>
           ))}
