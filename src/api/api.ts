@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ICard } from "../types/FavoriteCard";
 
 const instance = axios.create({
   baseURL: "https://api.thecatapi.com/v1",
@@ -20,4 +21,10 @@ export const catsAPI = {
       `/images/search?breed_ids=${data.breed}&category_ids=${data.category}&mime_types=${data.fileType}`
     );
   },
+  getFavorite() {
+    return instance.get<ICard[]>(`/favourites`);
+  },
+  addFavorite(data: { image_id: string }) {
+    return instance.post(`/favourites`, data);
+  }
 };
