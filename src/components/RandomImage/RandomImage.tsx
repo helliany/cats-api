@@ -1,9 +1,10 @@
 import { Box, Card, Button, CircularProgress, IconButton } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getImagesAsync } from "../../redux/imagesSlice";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { catsAPI } from "../../api/api";
 
 const RandomImage = () => {
@@ -12,6 +13,7 @@ const RandomImage = () => {
   const { selectedCategory } = useAppSelector((state) => state.categories);
   const { selectedFileType } = useAppSelector((state) => state.files);
   const dispatch = useAppDispatch();
+  const [isLiked, setIsLiked] = useState(false);
 
   const data = {
     breed: selectedBreed,
@@ -27,14 +29,16 @@ const RandomImage = () => {
     dispatch(getImagesAsync(data));
   };
 
-  const handleClickFavorite = async () => {
+  const handleAddFavorite = async () => {
+    if (isLiked) return;
+
     try {
       if (image.id) {
-        const res = await catsAPI.addFavorite({ image_id: image.id });
-        console.log('res', res)
+        await catsAPI.addFavorite({ image_id: image.id });
+        setIsLiked(true);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   };
 
@@ -85,9 +89,13 @@ const RandomImage = () => {
                 fontSize: "2 rem",
               }}
               size="large"
-              onClick={handleClickFavorite}
+              onClick={handleAddFavorite}
             >
-              <FavoriteBorderIcon fontSize="large" />
+              {isLiked ? (
+                <FavoriteIcon fontSize="large" sx={{ color: "#FD49A0" }} />
+              ) : (
+                <FavoriteBorderIcon fontSize="large" />
+              )}
             </IconButton>
           </>
         )}

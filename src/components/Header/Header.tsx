@@ -41,7 +41,7 @@ const Header = () => {
             >
               <FavoriteOutlinedIcon />
               <Box component="span" ml={1}>
-                Favorite
+                Favorites
               </Box>
             </Button>
           </Grid>

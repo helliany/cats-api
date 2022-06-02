@@ -26,5 +26,8 @@ export const catsAPI = {
   },
   addFavorite(data: { image_id: string }) {
     return instance.post(`/favourites`, data);
+  },
+  removeFavorite(id: number) {
+    return instance.delete(`/favourites/${id}`);
   }
 };
