@@ -2,7 +2,6 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import breedsReducer from './breedsSlice';
 import categoriesReducer from './categoriesSlice';
 import imagesReducer from './imagesSlice';
-import counterReducer from '../features/counter/counterSlice';
 import fileTypesReducer from './fileTypesSlice';
 
 export const store = configureStore({
@@ -10,7 +9,6 @@ export const store = configureStore({
     breeds: breedsReducer,
     categories: categoriesReducer,
     images: imagesReducer,
-    counter: counterReducer,
     files: fileTypesReducer,
   },
 });
