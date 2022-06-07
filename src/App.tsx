@@ -16,7 +16,7 @@ const theme = createTheme({
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Header />
         <Container sx={{ py: 2 }}>
           <Routes>
