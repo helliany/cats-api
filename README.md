@@ -2,6 +2,7 @@
 [App link](https://helliany.github.io/cats-api/)
 
 Responsive SPA with pictures of cats that allows you to add / remove picture to your favorites.
+
 The project uses the API: https://docs.thecatapi.com/
 
 ## Technologies:
