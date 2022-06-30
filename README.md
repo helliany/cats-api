@@ -1,20 +1,32 @@
-# Cats App - search and add to favorite
+# Cats App
 [App link](https://helliany.github.io/cats-api/)
 
-## Available Scripts
+Responsive SPA with pictures of cats that allows you to add / remove picture to your favorites.
 
-In the project directory, you can run:
+The project uses the API: https://docs.thecatapi.com/
 
-### `npm start`
+## Technologies:
++ TypeScript
++ React
++ Redux
++ Jest
++ Material UI
++ Axios
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project deployment instructions:
++ Clone the repository:
+```
+git clone https://github.com/helliany/cats-api.git
+```
++ Install dependencies:
+```
+npm i
+```
++ Runs the app in the development mode:
+```
+npm start
+```
++ Builds the app for production to the build folder:
+```
+npm run build
+```
