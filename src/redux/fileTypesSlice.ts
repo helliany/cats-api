@@ -1,20 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface IFileTypes {
+const initialState = {
   fileTypes: {
     animated: "gif",
     static: "jpg, png",
     all: "gif, jpg, png",
-  };
-  selectedFileType: string;
-}
-
-const initialState: IFileTypes = {
-  fileTypes: {
-    animated: "gif",
-    static: "jpg, png",
-    all: "gif, jpg, png",
-  },
+  } as const,
   selectedFileType: "",
 };
 

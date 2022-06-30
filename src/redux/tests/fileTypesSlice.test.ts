@@ -1,15 +1,14 @@
 import fileTypesReducer, {
-  IFileTypes,
   setSelected,
 } from '../fileTypesSlice';
 
 describe('breeds reducer', () => {
-  const initialState: IFileTypes = {
+  const initialState = {
     fileTypes: {
       animated: "gif",
       static: "jpg, png",
       all: "gif, jpg, png",
-    },
+    } as const,
     selectedFileType: "",
   };
   it('should handle initial state', () => {
