@@ -14,6 +14,7 @@ const RandomImage = () => {
   const { selectedFileType } = useAppSelector((state) => state.files);
   const dispatch = useAppDispatch();
   const [isLiked, setIsLiked] = useState(false);
+  const [likedId, setLikedId] = useState(null);
 
   const data = {
     breed: selectedBreed,
@@ -25,20 +26,34 @@ const RandomImage = () => {
     dispatch(getImagesAsync(data));
   }, []);
 
+  useEffect(() => {
+    setIsLiked(false);
+    setLikedId(null);
+  }, [image])
+
   const handleClick = () => {
     dispatch(getImagesAsync(data));
   };
 
   const handleAddFavorite = async () => {
-    if (isLiked) return;
-
-    try {
-      if (image.id) {
-        await catsAPI.addFavorite({ image_id: image.id });
-        setIsLiked(true);
+    if (isLiked && likedId) {
+      try {
+        await catsAPI.removeFavorite(likedId);
+        setLikedId(null);
+        setIsLiked(false);
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
+    } else {
+      try {
+        if (image.id) {
+          const res = await catsAPI.addFavorite({ image_id: image.id });
+          setLikedId(res.data.id);
+          setIsLiked(true);
+        }
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -60,7 +75,8 @@ const RandomImage = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          p: 3,
+          py: 3,
+          px: 7,
           height: { xs: "400px", md: "calc(100vh - 300px)" },
           backgroundColor: "#e5dbff",
           position: "relative",
@@ -84,8 +100,8 @@ const RandomImage = () => {
             <IconButton
               sx={{
                 position: "absolute",
-                right: 10,
-                top: 10,
+                right: 0,
+                top: 0,
                 fontSize: "2 rem",
               }}
               size="large"
